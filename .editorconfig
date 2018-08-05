@@ -1,0 +1,17 @@
+#规范IDE编辑器的，让不同的编辑器通过安装editorconfig的插件让编辑器在编辑该项目的时候使用相同的配置
+
+#在这个项目中，读editorconfig就读到这个文件就可以了
+root = true
+
+#给所有的文件指定规范
+[*]
+charset = utf-8
+end_of_line = lf
+#tab键的长度
+indent_size = 2
+#Windows会使用制表符来代替space
+indent_style = space
+#保存一个文件的时候，在最后加上一个空行
+insert_final_newline = true
+#在写代码的时候，一行后面多了一个空格，这个配置会将这个空格优化掉
+trim_trailing_whitespace = true
