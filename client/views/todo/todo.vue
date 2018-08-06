@@ -13,14 +13,14 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
-  data () {
+  data() {
     return {
       todos: [],
       filter: 'all'
     }
   },
   methods: {
-    addTodo (e) {
+    addTodo(e) {
       if (e.target.value.trim().length === 0) {
         return
       }
@@ -31,18 +31,18 @@ export default {
       })
       e.target.value = ''
     },
-    deleteTodo (id) {
+    deleteTodo(id) {
       this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
     },
-    toggleFilter (state) {
+    toggleFilter(state) {
       this.filter = state
     },
-    clearAllCompleted () {
+    clearAllCompleted() {
       this.todos = this.todos.filter(todo => !todo.completed)
     }
   },
   computed: {
-    filterTodos () {
+    filterTodos() {
       if (this.filter === 'all') {
         return this.todos
       }

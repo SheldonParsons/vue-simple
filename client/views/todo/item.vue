@@ -19,7 +19,7 @@ export default {
     }
   },
   methods: {
-    deleteTodo () {
+    deleteTodo() {
       this.$emit('del', this.todo.id)
     }
   }
