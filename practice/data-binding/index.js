@@ -8,7 +8,7 @@ new Vue({
   // v-on则是绑定事件的指令，缩略的写法：“@”
   // 以这种方式动态的赋予class：:class="{active: isActive}"，isActive为true时class值为active，否则为空
   // 还有一种数组的写法：:class="[isActive ? 'active': '']"
-  // 还有一种合并的写法：:class="[{actice: isActive}}]"
+  // 还有一种合并的写法：:class="[{actice: isActive}]"
   template: `<div>
   {{isActive ? 'active':'no active'}}
   {{arr.join('  ')}}
