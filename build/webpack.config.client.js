@@ -14,7 +14,9 @@ const defaultPlugins = [
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
-  new HtmlPlugin({ template: './index.html' })// 自动创建一个html来容纳项目
+  new HtmlPlugin({
+    template: path.join(__dirname, 'template.html')
+  })// 自动创建一个html来容纳项目
 ]
 
 const devServer = {
@@ -27,7 +29,10 @@ const devServer = {
 
   // }
   // open: true//启动玩dev-server后自动打开浏览器，有点烦
-  hot: true// 热加载，改了一个组件的代码，只重新渲染页面当前这个组件的效果，不会让整个页面重新加载
+  hot: true, // 热加载，改了一个组件的代码，只重新渲染页面当前这个组件的效果，不会让整个页面重新加载
+  historyApiFallback: {
+    index: '/public/index.html'
+  }
 }
 
 let config

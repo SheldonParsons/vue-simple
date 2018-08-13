@@ -3,6 +3,7 @@
       <input type="text" class="add-input" autofocus="autofocus" placeholder="接下来做什么？" @keyup.enter="addTodo">
       <Item :todo="todo" v-for="todo in filterTodos" :key="todo.id" @del="deleteTodo"></Item>
       <Tabs :filter="filter" :todos="todos" @state="toggleFilter" @clearAll='clearAllCompleted'></Tabs>
+      <!-- <router-view/> -->
   </section>
 </template>
 
@@ -13,6 +14,10 @@ import Tabs from './tabs.vue'
 let id = 0
 
 export default {
+  props: ['id'],
+  mounted() {
+    console.log(this.id)
+  },
   data() {
     return {
       todos: [],
