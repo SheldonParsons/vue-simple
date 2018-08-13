@@ -13,6 +13,13 @@ Vue.use(Vuex)
 const router = createRouter()
 const store = createStore()
 
+// 动态加载模块
+store.registerModule('c', {
+  state: {
+    text: 3
+  }
+})
+
 new Vue({
   router,
   store,
