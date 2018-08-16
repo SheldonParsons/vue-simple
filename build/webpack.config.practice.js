@@ -6,7 +6,7 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 
 const defaultPlugins = [
-  new webpack.DefinePlugin({//
+  new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: '"development"'
     }

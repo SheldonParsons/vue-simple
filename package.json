@@ -12,14 +12,19 @@
     "lint": "eslint --ext .js --ext .jsx --ext .vue client",
     "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue client build *.js",
     "precommit": "npm run lint-fix ",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js"
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+    "dev:server": "cross-env NODE-ENV=development node server/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "axios": "^0.17.1",
+    "ejs": "^2.5.7",
+    "koa": "^2.4.1",
+    "koa-router": "^7.4.0",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.13",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -28,6 +33,7 @@
     "babel-eslint": "^8.2.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-syntax-jsx": "^6.8.0",
     "babel-plugin-transform-vue-jsx": "^3.5.0",
     "babel-preset-env": "^1.6.1",
@@ -46,6 +52,7 @@
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
+    "memory-fs": "^0.4.1",
     "postcss-loader": "^2.0.9",
     "rimraf": "^2.6.2",
     "style-loader": "^0.19.1",

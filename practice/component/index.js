@@ -1,5 +1,5 @@
 // import './define.js'
 // import './extend.js'
-// import './v-model.js'
+import './v-model.js'
 // import './features.js'
-import './render.js'
+// import './render.js'

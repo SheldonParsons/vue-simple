@@ -5,18 +5,21 @@ const merge = require('webpack-merge')
 // 将非js的代码单独打包成一个静态资源文件
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const baseConfig = require('./webpack.config.base')
+// 这个插件可以帮客户端生成vue-ssr-client-manifest.json文件，这个文件提供给服务端渲染
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
 const defaultPlugins = [
-  new webpack.DefinePlugin({//
+  new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
   new HtmlPlugin({
     template: path.join(__dirname, 'template.html')
-  })// 自动创建一个html来容纳项目
+  }), // 自动创建一个html来容纳项目
+  new VueClientPlugin()
 ]
 
 const devServer = {
@@ -68,7 +71,7 @@ if (isDev) {
     devServer,
     plugins: defaultPlugins.concat([
       new webpack.HotModuleReplacementPlugin(), // 启动hot功能的插件
-      new webpack.NoEmitOnErrorsPlugin()// 帮助减少一些我们不需要信息展示的问题
+      new webpack.NoEmitOnErrorsPlugin() // 帮助减少一些我们不需要信息展示的问题
     ])
   })
 } else {

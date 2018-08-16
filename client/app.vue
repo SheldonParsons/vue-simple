@@ -9,9 +9,9 @@
         <transition name="fade">
           <router-view />
         </transition>
-        <p>{{fullName}}{{counter}}</p>
+        <!-- <p>{{fullName}}{{counter}}</p>
         <p>{{textA}}{{textB}}{{textC}}</p>
-        <p>{{textPlus}}</p>
+        <p>{{textPlus}}</p> -->
         <Footer></Footer>
         <!-- <router-view name="a"/> -->
     </div>
@@ -19,7 +19,7 @@
 
 
 <script>
-import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
+// import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
@@ -31,33 +31,33 @@ export default {
     // Todo
   },
   mounted() {
-    console.log(this.$store)
-    let i = 1
-    setInterval(() => {
-      this.updateCount({num: i++, num2: 2})
-    }, 1000)
-    this.updateCountAsync({num: 5, time: 2000})
-    // 添加了命名空间的mutations
-    this['a/updateText']('111111111')
-    this['a/add']()
-    this.testAction()
+    // console.log(this.$store)
+    // let i = 1
+    // setInterval(() => {
+    //   this.updateCount({num: i++, num2: 2})
+    // }, 1000)
+    // this.updateCountAsync({num: 5, time: 2000})
+    // // 添加了命名空间的mutations
+    // this['a/updateText']('111111111')
+    // this['a/add']()
+    // this.testAction()
   },
   computed: {
     // 通过不同的模块调用
     // textA() {
     //   return this.$store.state.a.text
     // },
-    textB() {
-      return this.$store.state.b.text
-    },
+    // textB() {
+    //   return this.$store.state.b.text
+    // },
     // State和Getters的用法，以及Vuex提供的简单方式调用
     // fullName() {
     //   return this.$store.getters.fullName
     // }
-    ...mapGetters({
-      'fullName': 'fullName',
-      textPlus: 'a/textPlus'
-    }),
+    // ...mapGetters({
+    //   'fullName': 'fullName',
+    //   textPlus: 'a/textPlus'
+    // }),
     // count() {
     //   return this.$store.state.count
     // }
@@ -65,15 +65,15 @@ export default {
     // ...mapState({
     //   counter: 'count'
     // })
-    ...mapState({
-      counter: (state) => state.count,
-      textA: state => state.a.text,
-      textC: state => state.c.text
-    })
+    // ...mapState({
+    //   counter: (state) => state.count,
+    //   textA: state => state.a.text,
+    //   textC: state => state.c.text
+    // })
   },
   methods: {
-    ...mapActions(['updateCountAsync', 'a/add', 'testAction']),
-    ...mapMutations(['updateCount', 'a/updateText'])
+    // ...mapActions(['updateCountAsync', 'a/add', 'testAction']),
+    // ...mapMutations(['updateCount', 'a/updateText'])
   }
 }
 </script>
