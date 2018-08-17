@@ -2,13 +2,15 @@
     <div id="app">
         <div class="cover"></div>
         <Header></Header>
-        <router-link :to="{name: 'app'}">app</router-link>
-        <router-link to="/login">login</router-link>
+        <!-- <router-link :to="{name: 'app'}">app</router-link> -->
+        <!-- <router-link to="/login">login</router-link> -->
         <!-- <router-link to="/login/exact">login exact</router-link> -->
         <!-- <Todo></Todo> -->
         <transition name="fade">
           <router-view />
         </transition>
+        <button @click="notify">Click add notify</button>
+        <!-- <notification content="test notifysss"/> -->
         <!-- <p>{{fullName}}{{counter}}</p>
         <p>{{textA}}{{textB}}{{textC}}</p>
         <p>{{textPlus}}</p> -->
@@ -76,6 +78,12 @@ export default {
     // })
   },
   methods: {
+    notify() {
+      this.$notify({
+        content: 'sheldon test $notify',
+        btn: 'close'
+      })
+    }
     // ...mapActions(['updateCountAsync', 'a/add', 'testAction']),
     // ...mapMutations(['updateCount', 'a/updateText'])
   }
@@ -101,4 +109,10 @@ export default {
   opacity: 0.9
   z-index: -1
 }
+
+.fade-enter-active, .fade-leave-active
+  transition: opacity .5s
+.fade-enter, .fade-leave-to
+  opacity: 0
+
 </style>

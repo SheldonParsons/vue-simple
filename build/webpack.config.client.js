@@ -25,6 +25,8 @@ const defaultPlugins = [
 const devServer = {
   port: 8000, // 监听端口
   host: '0.0.0.0', // 局域网本机ip可访问
+  // 允许跨域请求
+  headers: { 'Access-Control-Allow-Origin': '*' },
   overlay: {// 在webpack编译的过程中有任何的错误，都可以进行控制
     errors: true// 显示在网页上面
   },
