@@ -1,4 +1,4 @@
-// 开发环境下服务端渲染
+// 帮助我们去编译出我们的server bundle
 const Router = require('koa-router')
 const axios = require('axios')
 const path = require('path')

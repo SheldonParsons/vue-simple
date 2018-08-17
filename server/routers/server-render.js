@@ -13,13 +13,18 @@ module.exports = async(ctx, renderer, template) => {
   try {
     // 首先用renderer将内容渲染出来
     const appString = await renderer.renderToString(context)
+
+    const {
+      title
+    } = context.meta.inject()
     // 将HTML渲染出来
     const html = ejs.render(template, {
       appString,
       // 拿到带有style标签的整个字符串，丢到HTML中
       style: context.renderStyles(),
       // js也是一样
-      scripts: context.renderScripts()
+      scripts: context.renderScripts(),
+      title: title.text()
     })
 
     ctx.body = html

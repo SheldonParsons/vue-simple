@@ -25,6 +25,10 @@ import Footer from './layout/footer.jsx'
 // import Todo from './views/todo/todo.vue'
 
 export default {
+  // 每个组件中都可以定义这个meta，如果下级组件没有定义则使用上级的，定义了就使用下级的
+  metaInfo: {
+    title: 'Sheldon\'s Todo App'
+  },
   components: {
     Header,
     Footer
