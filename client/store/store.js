@@ -22,15 +22,15 @@ export default () => {
         },
         mutations: {
           updateText(state, text) {
-            console.log('a.state', state)
+            // console.log('a.state', state)
             state.text = text
           }
         },
         getters: {
           // 可以拿到所有的getters和全局的state
           textPlus(state, getters, rootState) {
-            console.log(getters)
-            console.log(rootState)
+            // console.log(getters)
+            // console.log(rootState)
             return state.text + 1
           }
         },

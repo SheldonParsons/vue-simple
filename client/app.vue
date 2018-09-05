@@ -109,10 +109,4 @@ export default {
   opacity: 0.9
   z-index: -1
 }
-
-.fade-enter-active, .fade-leave-active
-  transition: opacity .5s
-.fade-enter, .fade-leave-to
-  opacity: 0
-
 </style>

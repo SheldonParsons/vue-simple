@@ -10,13 +10,14 @@ module.exports = async(ctx, renderer, template) => {
 
   const context = { url: ctx.path } // 用于服务端渲染时传到vue-server-renderer中去的
 
+  console.log('context:' + context)
+
   try {
     // 首先用renderer将内容渲染出来
     const appString = await renderer.renderToString(context)
 
-    const {
-      title
-    } = context.meta.inject()
+    const { title } = context.meta.inject()
+
     // 将HTML渲染出来
     const html = ejs.render(template, {
       appString,
