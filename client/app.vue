@@ -9,7 +9,7 @@
         <transition name="fade">
           <router-view />
         </transition>
-        <button @click="notify">Click add notify</button>
+        <!-- <button @click="notify">Click add notify</button> -->
         <!-- <notification content="test notifysss"/> -->
         <!-- <p>{{fullName}}{{counter}}</p>
         <p>{{textA}}{{textB}}{{textC}}</p>
