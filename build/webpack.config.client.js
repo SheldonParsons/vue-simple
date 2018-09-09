@@ -27,8 +27,9 @@ const devServer = {
   host: '0.0.0.0', // 局域网本机ip可访问
   // 允许跨域请求
   headers: { 'Access-Control-Allow-Origin': '*' },
-  overlay: {// 在webpack编译的过程中有任何的错误，都可以进行控制
-    errors: true// 显示在网页上面
+  overlay: {
+    // 在webpack编译的过程中有任何的错误，都可以进行控制
+    errors: true // 显示在网页上面
   },
   // historyFallback:{//将没有做映射的地址都映射到一个入口，index.上面去
 
@@ -37,6 +38,10 @@ const devServer = {
   hot: true, // 热加载，改了一个组件的代码，只重新渲染页面当前这个组件的效果，不会让整个页面重新加载
   historyApiFallback: {
     index: '/public/index.html'
+  },
+  proxy: {
+    '/api': 'http://127.0.0.1:3333/',
+    '/user': 'http://127.0.0.1:3333/'
   }
 }
 
@@ -57,9 +62,12 @@ if (isDev) {
               loader: 'css-loader',
               options: {
                 module: true,
-                localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
+                localIdentName: isDev
+                  ? '[path]-[name]-[hash:base64:5]'
+                  : '[hash:base64:5]'
               }
-            }, {
+            },
+            {
               loader: 'postcss-loader',
               options: {
                 sourceMap: true
@@ -99,9 +107,12 @@ if (isDev) {
                 options: {
                   module: true,
                   // 我们可以使用vue cssmudules的方式给其他的css的classname来命名
-                  localIdentName: isDev ? '[path]-[name]-[hash:base64:5]' : '[hash:base64:5]'
+                  localIdentName: isDev
+                    ? '[path]-[name]-[hash:base64:5]'
+                    : '[hash:base64:5]'
                 }
-              }, {
+              },
+              {
                 loader: 'postcss-loader',
                 options: {
                   sourceMap: true

@@ -2,6 +2,18 @@ const Router = require('koa-router')
 
 const apiRouter = new Router({ prefix: '/api' })
 
+const validateUser = async(ctx, next) => {
+  if (!ctx.session.user) {
+    ctx.status = 401
+    ctx.body = 'need Login'
+  } else {
+    await next()
+  }
+}
+
+// 直接在这里加session控制，就可以适用于/api路径下的所有请求，也可以在请求方法的第二个参数里面添加控制
+apiRouter.use(validateUser)
+
 const successResponse = data => {
   return {
     success: true,

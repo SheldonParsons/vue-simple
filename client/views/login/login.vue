@@ -4,7 +4,7 @@
       <span>登陆</span>
       <span class="error-msg" v-show="errorMsg">{{errorMsg}}</span>
       <input type="text" class="login-input" placeholder="Username" v-model="username">
-      <input type="text" class="login-input" placeholder="Password" v-model="password">
+      <input type="password" class="login-input" autocomplete="new-password" placeholder="Password" v-model="password">
       <button type="submit" class="login-btn">登陆</button>
     </h1>
   </form>
@@ -27,7 +27,7 @@ export default {
     ...mapActions(['login']),
     doSubmit(e) {
       e.preventDefault()
-      if (this.validate) {
+      if (this.validate()) {
         this.login({
           username: this.username,
           password: this.password
@@ -38,15 +38,15 @@ export default {
     },
     validate() {
       if (!this.username.trim()) {
-        this.errorMsg = 'Username 不能为空'
+        this.errorMsg = '登录名不能为空'
         return false
       }
       if (!this.password.trim()) {
-        this.errorMsg = 'Password 不能为空'
+        this.errorMsg = '密码不能为空'
         return false
       }
       this.errorMsg = ''
-      return false
+      return true
     }
   }
 }
@@ -75,6 +75,7 @@ export default {
   width 100%
   border-radius 0
   box-shadow 0 0 0
+  box-sizing:border-box
 .login-btn
   appearance none
   width 100%

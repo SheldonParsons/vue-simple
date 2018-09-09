@@ -1,12 +1,15 @@
 <template>
     <div id="app">
         <div class="cover"></div>
+        <div id="loading" v-show="loading">
+          <Loading></Loading>
+        </div>
         <Header></Header>
         <!-- <router-link :to="{name: 'app'}">app</router-link> -->
         <!-- <router-link to="/login">login</router-link> -->
         <!-- <router-link to="/login/exact">login exact</router-link> -->
         <!-- <Todo></Todo> -->
-        <transition name="fade">
+        <transition name="fade" mode="out-in">
           <router-view />
         </transition>
         <!-- <button @click="notify">Click add notify</button> -->
@@ -21,9 +24,10 @@
 
 
 <script>
-// import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
+import {mapState} from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
+import Loading from './components/loading/loading.vue'
 // import Todo from './views/todo/todo.vue'
 
 export default {
@@ -33,7 +37,8 @@ export default {
   },
   components: {
     Header,
-    Footer
+    Footer,
+    Loading
     // Todo
   },
   mounted() {
@@ -49,6 +54,7 @@ export default {
     // this.testAction()
   },
   computed: {
+    ...mapState(['loading'])
     // 通过不同的模块调用
     // textA() {
     //   return this.$store.state.a.text
@@ -108,5 +114,17 @@ export default {
   background-color: #999
   opacity: 0.9
   z-index: -1
+}
+#loading{
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color rgba(255,255,255,.3)
+  z-index 99
+  display flex
+  align-items center
+  justify-content center
 }
 </style>

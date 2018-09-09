@@ -1,58 +1,77 @@
 <template>
   <section class="real-app">
-      <div class="tab-container">
-        <tabs :value="filter" @change="handleChangeTab">
-          <tab :label="tab" :index="tab" v-for="tab in states" :key="tab"></tab>
-        </tabs>
-      </div>
-      <input type="text" class="add-input" autofocus="autofocus" placeholder="接下来做什么？" @keyup.enter="addTodo">
-      <Item :todo="todo" v-for="todo in filterTodos" :key="todo.id" @del="deleteTodo"></Item>
-      <Helper :filter="filter" :todos="todos" @clearAll='clearAllCompleted'></Helper>
-      <!-- <router-view/> -->
+    <div class="tab-container">
+      <tabs :value="filter" @change="handleChangeTab">
+        <tab :label="tab" :index="tab" v-for="tab in states" :key="tab"></tab>
+      </tabs>
+    </div>
+    <input type="text" class="add-input" autofocus="autofocus" placeholder="接下来做什么？" @keyup.enter="handleAll">
+    <Item :todo="todo" v-for="todo in filterTodos" :key="todo.id" @del="deleteTodo" @toggle="toggleTodostate(todo)"></Item>
+    <Helper :filter="filter" :todos="todos" @clearAll='clearAllCompleted'></Helper>
+    <!-- <router-view/> -->
   </section>
 </template>
 
 
 <script>
+import {
+  mapState, mapActions
+} from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
-let id = 0
 
 export default {
   metaInfo: {
     title: 'The Todo App'
   },
   props: ['id'],
+  mounted() {
+    this.fetchTodos()
+  },
   data() {
     return {
-      todos: [],
       filter: 'all',
       states: ['all', 'active', 'completed']
     }
   },
   methods: {
-    addTodo(e) {
+    ...mapActions(['fetchTodos', 'addTodo', 'deleteTodo', 'updateTodo', 'deleteAllCompleted']),
+    handleAll(e) {
+      const content = e.target.value
       if (e.target.value.trim().length === 0) {
+        this.$notify({
+          content: '不允许输入空的内容'
+        })
         return
       }
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value.trim(),
+      const todo = {
+        content,
         completed: false
-      })
+      }
+      this.addTodo(todo)
       e.target.value = ''
     },
-    deleteTodo(id) {
-      this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+    // deleteTodo(id) {
+    //   this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
+    // },
+    toggleTodostate(todo) {
+      this.updateTodo({
+        id: todo.id,
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      })
     },
     clearAllCompleted() {
-      this.todos = this.todos.filter(todo => !todo.completed)
+      // this.todos = this.todos.filter(todo => !todo.completed)
+      this.deleteAllCompleted()
     },
     handleChangeTab(value) {
       this.filter = value
     }
   },
   computed: {
+    ...mapState(['todos']),
     filterTodos() {
       if (this.filter === 'all') {
         return this.todos
@@ -96,8 +115,9 @@ export default {
   border: none;
   box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
 }
+
 .tab-container {
-  background-color #fff
-  padding 0 15px
+  background-color: #fff;
+  padding: 0 15px;
 }
 </style>

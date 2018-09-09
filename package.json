@@ -27,6 +27,7 @@
     "koa-body": "^2.5.0",
     "koa-router": "^7.4.0",
     "koa-send": "^5.0.0",
+    "koa-session": "^5.8.1",
     "sha1": "^1.1.1",
     "vue": "^2.5.13",
     "vue-meta": "^1.4.3",
