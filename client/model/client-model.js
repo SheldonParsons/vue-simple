@@ -2,6 +2,7 @@ import axios from 'axios'
 import { createError } from './util'
 
 const request = axios.create({
+  // baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:3333' : '/'
   baseURL: '/'
 })
 

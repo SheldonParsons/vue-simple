@@ -11,13 +11,16 @@ const serverRender = require('./server-render')
 const serverConfig = require('../../build/webpack.config.server')
 
 // 这样传入一个webpack配置就可以生成一个打包后文件
+console.log('dev-ssr.js:webpack打包server端代码')
 const serverComplier = webpack(serverConfig)
 const mfs = new MemoryFS()
+console.log('dev-ssr.js:指定webpack编译输出目录在memoryFS里面')
 serverComplier.outputFileSystem = mfs // 指定webpack编译输出目录在memoryFS里面
 
 // 记录webpack每次打包新生成的文件
 let bundle
 // 每次我们在server文件夹下修改了文件，都会重新执行一个打包
+console.log('dev-ssr.js:watch监听打包，修改代码后自动打包')
 serverComplier.watch({}, (err, stats) => {
   // 抛出打包时遇到的错误
   if (err) throw err
@@ -27,17 +30,20 @@ serverComplier.watch({}, (err, stats) => {
   stats.warnings.forEach(warn => console.log(warn))
 
   // webpack打包出来的文件输出的路径，这个在webpack.config.server已经定义了
+  console.log('dev-ssr.js:server端打包出来的文件输出路径')
   const bundlePath = path.join(
     serverConfig.output.path,
     'vue-ssr-server-bundle.json'
   )
   // mfs读取文件
+  console.log('dev-ssr.js:server端json化webpack打包出来的内容')
   bundle = JSON.parse(mfs.readFileSync(bundlePath, 'utf-8'))
   console.log('new bundle generated')
 })
 // 也是koa的中间件，处理服务端渲染返回来的信息
 const handleSSR = async(ctx) => {
   // 先判断bundle存不存在，第一次打包有可能bundle还没有打包完成
+  console.log('dev-ssr.js:开始处理服务端渲染返回的内容')
   if (!bundle) {
     ctx.body = 'just waiting...'
     return
@@ -45,12 +51,14 @@ const handleSSR = async(ctx) => {
   // 有bundle以后，就开始服务端渲染的过程
 
   // 我们通过http请求的方式拿到客户端打包出来的js
+  console.log('dev-ssr.js:通过http请求获取到客户端打包出来的内容')
   const clientManifestResp = await axios.get('http://127.0.0.1:8000/public/vue-ssr-client-manifest.json')
   const clientManifest = clientManifestResp.data
 
   // vue-server-renderer只是生成了body的内容，一个完整的HTML还需要header footer等内容
   // 所以我们需要一个html模板，这个使用了ejs来渲染我们的HTML模板
   // 生成模板以后我们需要fs把ejs读进来
+  console.log('dev-ssr.js:读取到服务端渲染的模板')
   const template = fs.readFileSync(
     path.join(__dirname, '../server.template.ejs'),
     'utf-8'
@@ -58,6 +66,7 @@ const handleSSR = async(ctx) => {
 
   // 第二步我们需要去声明一个renderer
   // 可以帮我们去生成一个我们可以直接去调用renderer的function
+  console.log('dev-ssr.js:创建Renderer')
   const renderer = VueServerRenderer.createBundleRenderer(bundle, {
     // 只需要他帮我们把APPString渲染出来，不使用默认的template
     inject: false,
@@ -66,6 +75,7 @@ const handleSSR = async(ctx) => {
     clientManifest
   })
 
+  console.log('dev-ssr.js:传参进入Renderer')
   await serverRender(ctx, renderer, template)
 }
 

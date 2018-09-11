@@ -25,6 +25,7 @@ app.use(
 
 const isDev = process.env.NODE_ENV === 'development'
 
+console.log('server.js:koa中间件初始化完成，开始进入第一个use函数')
 // 中间件，记录请求，和抓取错误信息，ctx上下文
 app.use(async(ctx, next) => {
   const isDev = process.env.NODE_ENV === 'development'
@@ -42,11 +43,13 @@ app.use(async(ctx, next) => {
   }
 })
 
+console.log('server.js:加载ctx.db...')
 app.use(async(ctx, next) => {
   ctx.db = db
   await next()
 })
 
+console.log('server.js:加载favicon.ico')
 app.use(async(ctx, next) => {
   if (ctx.path === '/favicon.ico') {
     await send(ctx, '/favicon.ico', { root: path.join(__dirname, '../') })
@@ -55,6 +58,7 @@ app.use(async(ctx, next) => {
   }
 })
 
+console.log('server.js:加载koa路由')
 app.use(koaBody())
 app.use(userRouter.routes()).use(userRouter.allowedMethods())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
@@ -72,6 +76,7 @@ app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 const HOST = process.env.HOST || '0.0.0.0'
 const PORT = process.env.PORT || 3333
 
+console.log('server.js:koa监听端口...')
 app.listen(PORT, HOST, () => {
   console.log(`server is listening on ${HOST}:${PORT}`)
 })

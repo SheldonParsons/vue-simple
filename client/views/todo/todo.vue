@@ -26,12 +26,23 @@ export default {
   },
   props: ['id'],
   mounted() {
-    this.fetchTodos()
+    console.log(this.todos, this.todos.length)
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
+  },
+  // 在这里组件中增加的自定义option，可以在渲染的时候，通过Promise.all获取到这个方法
+  asyncData({ store }) {
+    // 通过登录验证才返回数据
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    return Promise.resolve()
   },
   data() {
     return {
-      filter: 'all',
-      states: ['all', 'active', 'completed']
+      filter: '所有',
+      states: ['所有', '未完成', '已完成']
     }
   },
   methods: {
@@ -73,10 +84,10 @@ export default {
   computed: {
     ...mapState(['todos']),
     filterTodos() {
-      if (this.filter === 'all') {
+      if (this.filter === '所有') {
         return this.todos
       }
-      const completed = this.filter === 'completed'
+      const completed = this.filter === '已完成'
       return this.todos.filter(todo => completed === todo.completed)
     }
   },

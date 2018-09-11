@@ -1,7 +1,7 @@
 <template>
   <div class="helper">
-      <span class="left">{{unFinishedTodoLength}} items left</span>
-      <span class="clear" @click="clearAllCompleted">Clear Completed</span>
+      <span class="left">{{unFinishedTodoLength}} 项没有完成</span>
+      <span class="clear" @click="clearAllCompleted"><b>清除</b>所有已完成项</span>
   </div>
 </template>
 
