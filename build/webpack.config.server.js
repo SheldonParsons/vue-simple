@@ -9,6 +9,20 @@ const VueServerPlugin = require('vue-server-renderer/server-plugin')
 
 let config
 
+const isDev = process.env.NODE_ENV === 'development'
+
+const plugins = [
+  new ExtractPlugin('styls.[contentHash:8].css'),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'process.env.VUE_ENV': '"server"'
+  })
+]
+
+if (isDev) {
+  plugins.push(new VueServerPlugin())
+}
+
 config = merge(baseConfig, {
   target: 'node', // 定义打包出来的执行环境
   entry: path.join(__dirname, '../client/server-entry.js'),
@@ -23,7 +37,7 @@ config = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.styl$/,
+        test: /\.styl/,
         use: ExtractPlugin.extract({
           fallback: 'vue-style-loader',
           use: [
@@ -40,15 +54,7 @@ config = merge(baseConfig, {
       }
     ]
   },
-  plugins: [
-    new ExtractPlugin('styls.[contentHash:8].css'),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      'process.env.VUE_ENV': '"server"'
-    }),
-    // 使用server bundle的时候才会去使用这个插件，生成bundle.json
-    new VueServerPlugin()
-  ]
+  plugins
 })
 
 config.resolve = {

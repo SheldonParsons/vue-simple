@@ -15,7 +15,7 @@ export default [
     //   default: Todo,
     //   a: Login
     // },
-    component: () => import('../views/todo/todo.vue'),
+    component: () => import(/* webpackChunkName: "todo-view" */ '../views/todo/todo.vue'),
     // component: Todo,
     // 路由命名
     name: 'app',
@@ -34,7 +34,7 @@ export default [
   },
   {
     path: '/login',
-    component: () => import('../views/login/login.vue')
+    component: () => import(/* webpackChunkName: "login-view" */ '../views/login/login.vue')
     // component: Login
     // components: {
     //   default: Login,

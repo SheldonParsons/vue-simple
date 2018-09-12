@@ -69,7 +69,8 @@ if (isDev) {
   pageRouter = require('./routers/dev-ssr')
   // pageRouter = require('./routers/dev-ssr-no-bundle')
 } else {
-  pageRouter = require('./routers/ssr')
+  // pageRouter = require('./routers/ssr')
+  pageRouter = require('./routers/ssr-no-bundle')
 }
 // koa-router的既定用法
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())

@@ -1,4 +1,5 @@
-import classNames from '../assets/styles/footer.styl'
+// import classNames from '../assets/styles/footer.styl'
+import '../assets/styles/footer.styl'
 
 export default {
   data() {
@@ -12,7 +13,7 @@ export default {
     // 使用jsx更开放，功能更强大，使用vue结构更清晰，编码更方便
     return (
     // 使用vue modules的方式去命名classname
-      <div id={classNames.footer}>
+      <div id="footer">
         <span>Written by {this.author}</span>
       </div>
     )

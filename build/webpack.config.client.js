@@ -58,15 +58,7 @@ if (isDev) {
           test: /\.styl$/,
           use: [
             'vue-style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                module: true,
-                localIdentName: isDev
-                  ? '[path]-[name]-[hash:base64:5]'
-                  : '[hash:base64:5]'
-              }
-            },
+            'css-loader',
             {
               loader: 'postcss-loader',
               options: {
@@ -97,21 +89,12 @@ if (isDev) {
     module: {
       rules: [
         {
-          test: /\.styl$/,
+          test: /\.styl/,
           use: ExtractPlugin.extract({
             // 使用vue-stlye-loader可以让css样式也可以热加载
             fallback: 'vue-style-loader',
             use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  module: true,
-                  // 我们可以使用vue cssmudules的方式给其他的css的classname来命名
-                  localIdentName: isDev
-                    ? '[path]-[name]-[hash:base64:5]'
-                    : '[hash:base64:5]'
-                }
-              },
+              'css-loader',
               {
                 loader: 'postcss-loader',
                 options: {
@@ -136,7 +119,8 @@ if (isDev) {
       // 需要注意的是，vendor一定要放在runtime的前面
       new webpack.optimize.CommonsChunkPlugin({
         name: 'runtime'
-      })
+      }),
+      new webpack.NamedChunksPlugin()
     ])
   })
 }
