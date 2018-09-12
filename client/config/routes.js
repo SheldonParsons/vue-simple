@@ -16,6 +16,7 @@ export default [
     //   a: Login
     // },
     component: () => import('../views/todo/todo.vue'),
+    // component: Todo,
     // 路由命名
     name: 'app',
     // 保存路由中的信息
@@ -34,6 +35,7 @@ export default [
   {
     path: '/login',
     component: () => import('../views/login/login.vue')
+    // component: Login
     // components: {
     //   default: Login,
     //   a: Todo

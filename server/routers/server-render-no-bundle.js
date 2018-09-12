@@ -4,7 +4,7 @@
 const ejs = require('ejs')
 
 // ctx上下文，renderer开发和正式是不同的，所以我们要在外部传入，template也是一样
-module.exports = async(ctx, renderer, template) => {
+module.exports = async(ctx, renderer, template, bundle) => {
   // 指定上下文的Content-Type
   console.log('server-render.js:指定请求headers属性Content-Type')
   ctx.headers['Content-Type'] = 'text/html'
@@ -16,11 +16,14 @@ module.exports = async(ctx, renderer, template) => {
   try {
     // 首先用renderer将内容渲染出来
     console.log('server-render.js:字符化context')
-    const appString = await renderer.renderToString(context)
+    // const appString = await renderer.renderToString(context)
+    const app = await bundle(context)
 
     if (context.router.currentRoute.fullPath !== ctx.path) {
       return ctx.redirect(context.router.currentRoute.fullPath)
     }
+
+    const appString = await renderer.renderToString(app, context)
 
     const { title } = context.meta.inject()
 

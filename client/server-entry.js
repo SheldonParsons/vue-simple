@@ -30,13 +30,16 @@ export default context => {
           if (component.asyncData) {
             return component.asyncData({
               route: router.currentRoute,
+              router,
               store
             })
           }
         })
       ).then(data => {
         context.meta = app.$meta()
+        // 将store放入全局的context中
         context.state = store.state
+        context.router = router
         resolve(app)
       })
     })

@@ -32,11 +32,13 @@ export default {
     }
   },
   // 在这里组件中增加的自定义option，可以在渲染的时候，通过Promise.all获取到这个方法
-  asyncData({ store }) {
+  asyncData({ store, router }) {
     // 通过登录验证才返回数据
     if (store.state.user) {
       return store.dispatch('fetchTodos')
     }
+    router.replace('/login')
+    // 如果校验不通过直接返回
     return Promise.resolve()
   },
   data() {
@@ -110,7 +112,7 @@ export default {
   position: relative;
   margin: 0;
   width: 100%;
-  font-size: 24px;
+  font-size: 18px;
   font-family: inherit;
   font-weight: inherit;
   line-height: 1.4em;

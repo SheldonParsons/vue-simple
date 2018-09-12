@@ -46,6 +46,7 @@ config = merge(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
+    // 使用server bundle的时候才会去使用这个插件，生成bundle.json
     new VueServerPlugin()
   ]
 })
