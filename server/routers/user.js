@@ -4,7 +4,7 @@ const userRouter = new Router({ prefix: '/user' })
 
 userRouter.post('/login', async ctx => {
   const user = ctx.request.body
-  if (user.username === 'sheldon' && user.password === '123123') {
+  if (user.username === 'sheldon' && user.password === 'testingpf') {
     // 设置session，使用中间件koa-session
     ctx.session.user = {
       username: 'sheldon'

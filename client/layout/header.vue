@@ -1,6 +1,6 @@
 <template>
   <header :class="$style.mainHeader">
-      <h1>STodo</h1>
+      <h2>TestingPlatform Coming soon...</h2>
   </header>
 </template>
 

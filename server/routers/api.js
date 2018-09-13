@@ -39,9 +39,12 @@ apiRouter
     ctx.body = successResponse(data)
   })
   .post('/delete/completed', async ctx => {
-    console.log(ctx.request.body)
-    const data = await ctx.db.deleteCompleted(ctx.request.body.ids)
-    ctx.body = successResponse(data)
+    if (ctx.request.body.ids.length > 0) {
+      const data = await ctx.db.deleteCompleted(ctx.request.body.ids)
+      ctx.body = successResponse(data)
+    } else {
+      ctx.body = { info: 'There is no completed items.' }
+    }
   })
 
 module.exports = apiRouter
