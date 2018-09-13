@@ -1,0 +1,6 @@
+server.js:koa中间件初始化完成，开始进入第一个use函数
+server.js:加载ctx.db...
+server.js:加载favicon.ico
+server.js:加载koa路由
+server.js:koa监听端口...
+server is listening on localhost:8866
