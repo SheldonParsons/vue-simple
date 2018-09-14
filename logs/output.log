@@ -4,3 +4,50 @@ server.js:加载favicon.ico
 server.js:加载koa路由
 server.js:koa监听端口...
 server is listening on localhost:8866
+server.js:koa中间件初始化完成，开始进入第一个use函数
+server.js:加载ctx.db...
+server.js:加载favicon.ico
+server.js:加载koa路由
+server.js:koa监听端口...
+server is listening on localhost:8866
+request with path /
+server-render.js:指定请求headers属性Content-Type
+server-render.js:初始化context
+server-render.js:ctx.path:/
+server-render.js:字符化context
+server-entry.js:服务端入口
+server-entry.js:创建服务端Vue对象，从create-app.js
+create-app.js:开始创建Vue()实例，server和client实例都从此产出
+create-app.js:实例化Vue路由
+create-app.js:实例化Vuex.store
+create-app.js:实例Vue
+server-entry.js:将context.user对象指向store，此处将会决定session状态
+server-entry.js:主动向服务端路由推送路由信息
+server-entry.js:服务端路由onReady
+server-entry.js:根据推送路由匹配该路由下的组件
+request with path /login
+server-render.js:指定请求headers属性Content-Type
+server-render.js:初始化context
+server-render.js:ctx.path:/login
+server-render.js:字符化context
+server-entry.js:服务端入口
+server-entry.js:创建服务端Vue对象，从create-app.js
+create-app.js:开始创建Vue()实例，server和client实例都从此产出
+create-app.js:实例化Vue路由
+create-app.js:实例化Vuex.store
+create-app.js:实例Vue
+server-entry.js:将context.user对象指向store，此处将会决定session状态
+server-entry.js:主动向服务端路由推送路由信息
+server-entry.js:服务端路由onReady
+server-entry.js:根据推送路由匹配该路由下的组件
+server-render.js:从ejs模板中渲染出html
+server-render.js:将渲染出来的html指向koa的body，在页面中显示出来
+request with path /public/styls.e203530b.css
+request with path /public/runtime.da79566e.js
+request with path /public/vendor.1f63ebbe.js
+request with path /public/app.8e0182b2.js
+request with path /public/resources/client/assets/images/bg.55db3d93.jpeg
+request with path /public/login-view.77d0a461.js
+request with path /user/login
+request with path /public/todo-view.379a3a25.js
+request with path /api/todos

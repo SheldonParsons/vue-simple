@@ -40,6 +40,10 @@ export default [
     //   default: Login,
     //   a: Todo
     // }
+  },
+  {
+    path: '/vuex',
+    component: () => import(/* webpackChunkName: "vuex-view" */ '../views/vuex/vuex.vue')
   }
   // {
   //   path: '/login/exact',

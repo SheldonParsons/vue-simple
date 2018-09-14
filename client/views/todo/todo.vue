@@ -26,7 +26,6 @@ export default {
   },
   props: ['id'],
   mounted() {
-    console.log(this.todos, this.todos.length)
     if (this.todos && this.todos.length < 1) {
       this.fetchTodos()
     }
@@ -84,7 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['todos']),
+    ...mapState({todos: state => state.defaultModules.todos}),
     filterTodos() {
       if (this.filter === '所有') {
         return this.todos
