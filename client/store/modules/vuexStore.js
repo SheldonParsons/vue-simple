@@ -6,6 +6,6 @@ import vuexActions from '../actions/vuexActions'
 export default {
   state: vuexState,
   mutations: vuexMutations,
-  actions: vuexGetters,
-  getters: vuexActions
+  actions: vuexActions,
+  getters: vuexGetters
 }

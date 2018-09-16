@@ -19,6 +19,9 @@ export default {
   //     store.commit('updateCount', { num: data.num, num2: 1 })
   //   }, data.time)
   // },
+  helloAction({ commit }, value) {
+    commit('updateName', value)
+  },
   fetchTodos({ commit }) {
     commit('startLoading')
     return model

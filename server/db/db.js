@@ -1,3 +1,4 @@
+// 将真正的数据请求解耦出来
 const sha1 = require('sha1')
 const axios = require('axios')
 
