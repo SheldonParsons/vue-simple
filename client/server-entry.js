@@ -25,6 +25,7 @@ export default context => {
       if (!matchedComponents.length) {
         return reject(new Error('no component matched'))
       }
+      // 将多个promise对象包装成一个新的promise对象进行返回
       Promise.all(
         matchedComponents.map(component => {
           if (component.asyncData) {

@@ -13,6 +13,7 @@ const renderer = VueServerRenderer.createRenderer(
   }
 )
 
+// fs读取模板文件
 const template = fs.readFileSync(
   path.join(__dirname, '../server.template.ejs'),
   'utf-8'

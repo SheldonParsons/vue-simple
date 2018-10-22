@@ -2,6 +2,7 @@ const Router = require('koa-router')
 
 const apiRouter = new Router({ prefix: '/api' })
 
+// 验证方法，koa提供了一个全局验证的方式
 const validateUser = async(ctx, next) => {
   if (!ctx.session.user) {
     ctx.status = 401
@@ -14,6 +15,7 @@ const validateUser = async(ctx, next) => {
 // 直接在这里加session控制，就可以适用于/api路径下的所有请求，也可以在请求方法的第二个参数里面添加控制
 apiRouter.use(validateUser)
 
+// 成功返回的封装
 const successResponse = data => {
   return {
     success: true,
@@ -21,6 +23,7 @@ const successResponse = data => {
   }
 }
 
+// 此处调用存储在上下文中的db，和真正请求做解耦
 apiRouter
   .get('/todos', async ctx => {
     const todos = await ctx.db.getAllTodos()

@@ -12,12 +12,14 @@ module.exports = async(ctx, renderer, template, bundle) => {
   console.log('server-render.js:初始化context')
   console.log('server-render.js:ctx.path:' + ctx.path)
   const context = { url: ctx.path, user: ctx.session.user } // 用于服务端渲染时传到vue-server-renderer中去的
+  console.log(context)
 
   try {
-    // 首先用renderer将内容渲染出来
+    // 不适用bundle的方式来进行渲染
     console.log('server-render.js:字符化context')
-    // const appString = await renderer.renderToString(context)
     const app = await bundle(context)
+    console.log('server-render.js:context.router.currentRoute.fullPath:' + context.router.currentRoute.fullPath)
+    console.log('server-render.js:ctx.path:' + ctx.path)
 
     if (context.router.currentRoute.fullPath !== ctx.path) {
       return ctx.redirect(context.router.currentRoute.fullPath)

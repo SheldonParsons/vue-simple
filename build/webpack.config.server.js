@@ -14,7 +14,9 @@ const isDev = process.env.NODE_ENV === 'development'
 const plugins = [
   new ExtractPlugin('styls.[contentHash:8].css'),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+    'process.env.NODE_ENV': JSON.stringify(
+      process.env.NODE_ENV || 'development'
+    ),
     'process.env.VUE_ENV': '"server"'
   })
 ]
@@ -59,7 +61,7 @@ config = merge(baseConfig, {
 
 config.resolve = {
   alias: {
-    'model': path.join(__dirname, '../client/model/server-model.js')
+    model: path.join(__dirname, '../client/model/server-model.js')
   }
 }
 
